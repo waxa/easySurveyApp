@@ -11,7 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,8 +32,9 @@ import java.net.URL;
 public class MainActivity extends ActionBarActivity {
 
     private Button enviar;
+    private EnviarId tarea;
 
-    public static String URL = "";
+    public static String URL = "http://gui.uva.es:22/guardarId/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,29 +53,42 @@ public class MainActivity extends ActionBarActivity {
 
 
     private void lanzarPeticion(){
-
+        tarea = new EnviarId();
+        tarea.execute();
     }
 
     private void uploadUrl() throws Exception {
-
+/*
         URL url = new URL(MainActivity.URL);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(15000 /* milliseconds */);
-        conn.setConnectTimeout(17000 /* milliseconds */);
+        conn.setReadTimeout(15000 *//* milliseconds *//*);
+        conn.setConnectTimeout(17000 *//* milliseconds *//*);
         conn.setRequestMethod("POST");
-
         conn.setDoOutput(true);
         conn.setDoInput(false);
-        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-        JSONObject obj = new JSONObject();
+        */
 
+        HttpClient c = new DefaultHttpClient();
+        HttpPost post = new HttpPost(MainActivity.URL);
+
+        JSONObject obj = new JSONObject();
         obj.put("id","waxaMovil");
+
+        StringEntity se = new StringEntity(obj.toString());
+
+        post.setEntity(se);
+
+        HttpResponse httpresponse = c.execute(post);
+/*
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+
 
         wr.write(obj.toString());
         wr.flush();
         // Start the query
         conn.connect();
-        conn.disconnect();
+        conn.disconnect();*/
     }
 
     private class EnviarId extends AsyncTask<String, Void, Void> {
