@@ -276,9 +276,11 @@ public class MainActivity extends ActionBarActivity {
             // Se recupera el "registration Id" almacenado en caso que la
             // aplicación ya se hubiera registrado previamente
             regid = obtenerIdentificadorDeRegistroAlmacenado();
+
             // Si no se ha podido recuperar el id del registro procedemos a
             // obtenerlo mediante el proceso de registro
-            if (regid.isEmpty()) {
+            //if (regid.isEmpty()) {
+            if (true) {
                 // Se inicia el proceso de registro
                 registroEnSegundoPlano();
             }
