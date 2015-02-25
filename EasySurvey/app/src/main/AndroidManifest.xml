@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="waxa.easysurvey" >
 
-    <permission android:name="com.goplasoft.democfg.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <permission
+        android:name="com.goplasoft.democfg.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -16,13 +19,16 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <service android:name=".GcmIntentService" />
-        <receiver android:name=".GcmBroadcastReceiver"       android:permission="com.google.android.c2dm.permission.SEND" >
-        <intent-filter>
-            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-            <category android:name="com.goplasoft.demogcm" />
-        </intent-filter>
-    </receiver>
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.goplasoft.demogcm" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".MainActivity"
@@ -32,6 +38,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Mensaje"
+            android:label="@string/title_activity_mensaje" >
         </activity>
     </application>
 

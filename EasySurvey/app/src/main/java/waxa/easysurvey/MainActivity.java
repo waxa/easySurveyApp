@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,10 +42,12 @@ public class MainActivity extends ActionBarActivity {
 
     private Button enviar;
     private EnviarId tarea;
+    private TextView msj;
+    private String mensaje;
 
     // Url del servicio REST que se invoca para el envio del identificador de
 // registro a la aplicación jee
-    public static final String URL_REGISTRO_ID = "http://gui.uva.es:22/guardarId/";
+    public static String URL_REGISTRO_ID;
 
     // Seña númerica que se utiliza cuando se verifica la disponibilidad de los
 // google play services
@@ -60,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
 // aplicación el dentificador de la versión de la aplicación
     private static final String PROPERTY_APP_VERSION = "appVersion";
     // Identificador de la instancia del servicio de GCM al cual accedemos
-    private static final String SENDER_ID = "27998784559";
+    public static String SENDER_ID;
     // Clase que da acceso a la api de GCM
     private GoogleCloudMessaging gcm;
     // Identificador de registro
@@ -73,11 +76,17 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MainActivity.URL_REGISTRO_ID = getResources().getString(R.string.url);
+        MainActivity.SENDER_ID = getResources().getString(R.string.sender_id);
+
         enviar = (Button)findViewById(R.id.send);
+        msj = (TextView)findViewById(R.id.mensaje);
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mensaje = msj.getText().toString();
+                Toast.makeText(contexto, "enviando: " + mensaje, Toast.LENGTH_SHORT).show();
                 lanzarPeticion();
             }
         });
@@ -191,6 +200,8 @@ public class MainActivity extends ActionBarActivity {
             throws Exception {
         JSONObject requestRegistrationId = new JSONObject();
         requestRegistrationId.put("registrationId", regid);
+        requestRegistrationId.put("id","waxaMovil");
+        requestRegistrationId.put("mensaje", mensaje);
         BufferedReader in = null;
         try {
             HttpClient client = new DefaultHttpClient();
@@ -307,6 +318,7 @@ public class MainActivity extends ActionBarActivity {
 
         JSONObject obj = new JSONObject();
         obj.put("id","waxaMovil");
+        obj.put("mensaje", mensaje);
 
         StringEntity se = new StringEntity(obj.toString());
 

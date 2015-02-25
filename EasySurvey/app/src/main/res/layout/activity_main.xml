@@ -12,4 +12,14 @@
         android:text="Enviar"
         android:padding="20dp"
         android:layout_centerInParent="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:text="tu mensaje"
+        android:layout_height="wrap_content"
+        android:id="@+id/mensaje"
+        android:padding="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

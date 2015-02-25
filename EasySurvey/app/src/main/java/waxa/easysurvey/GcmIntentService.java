@@ -33,7 +33,8 @@ public class GcmIntentService extends IntentService {
         if (!extras.isEmpty()) {
             if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 //Se visualiza el mendaje en la barra de notificaciones
-                sendNotification(extras.getString("mensaje"));
+                Datos.MSJ = extras.getString("mensaje");
+                sendNotification(Datos.MSJ);
             }
         }
 
@@ -51,7 +52,8 @@ public class GcmIntentService extends IntentService {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+                new Intent(this, Mensaje.class), 0);
+
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.mipmap.ic_launcher)
@@ -60,6 +62,7 @@ public class GcmIntentService extends IntentService {
                 .setContentText(msg);
 
         mBuilder.setContentIntent(contentIntent);
+        mBuilder.setAutoCancel(true);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
