@@ -200,7 +200,7 @@ public class MainActivity extends ActionBarActivity {
             throws Exception {
         JSONObject requestRegistrationId = new JSONObject();
         requestRegistrationId.put("registrationId", regid);
-        requestRegistrationId.put("id","waxaMovil");
+        requestRegistrationId.put("name",Datos.USRLOGIN);
         requestRegistrationId.put("mensaje", mensaje);
         BufferedReader in = null;
         try {

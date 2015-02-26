@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class Mensaje extends ActionBarActivity {
 
@@ -17,8 +20,17 @@ public class Mensaje extends ActionBarActivity {
         setContentView(R.layout.activity_mensaje);
 
         mensaje = (TextView)findViewById(R.id.mensajeFinal);
+        /*String msj = "";
 
-        mensaje.setText(Datos.MSJ);
+        try {
+            JSONObject obj = new JSONObject(Datos.MSJ);
+            msj += "from :\n" + obj.getString("from") + "\n";
+            msj += "mensaje :\n" + obj.getString("mensaje");
+        }catch (JSONException e){
+            msj = "invalid JSON";
+        }*/
+
+        mensaje.setText(Datos.msj);
     }
 
 

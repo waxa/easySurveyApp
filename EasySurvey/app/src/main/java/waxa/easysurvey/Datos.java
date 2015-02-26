@@ -6,4 +6,6 @@ package waxa.easysurvey;
 public class Datos {
 
     public static String MSJ;
+    public static String USRLOGIN;
+    public static String msj;
 }

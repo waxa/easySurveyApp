@@ -10,6 +10,9 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class GcmIntentService extends IntentService {
 
     public static final int NOTIFICATION_ID = 1;
@@ -55,11 +58,20 @@ public class GcmIntentService extends IntentService {
                 new Intent(this, Mensaje.class), 0);
 
 
+        try {
+            JSONObject obj = new JSONObject(Datos.MSJ);
+            Datos.msj += "from :\n" + obj.getString("from") + "\n";
+            Datos.msj += "mensaje :\n" + obj.getString("mensaje") + "\n";
+        }catch (JSONException e){
+            Datos.msj += "invalid JSON";
+        }
+
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Notificacion:" + msg)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg);
+                .setContentTitle("EasySurvey")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(Datos.msj))
+                .setContentText(Datos.msj);
 
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setAutoCancel(true);
