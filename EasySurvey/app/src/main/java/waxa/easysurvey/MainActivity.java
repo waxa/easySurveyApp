@@ -88,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
                 mensaje = msj.getText().toString();
                 Toast.makeText(contexto, "enviando: " + mensaje, Toast.LENGTH_SHORT).show();
                 lanzarPeticion();
+                msj.setText("");
             }
         });
 

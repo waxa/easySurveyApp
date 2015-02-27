@@ -36,7 +36,11 @@
         </activity>
         <activity
             android:name=".Mensaje"
-            android:label="@string/title_activity_mensaje" >
+            android:label="@string/title_activity_mensaje"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="waxa.easysurvey.MainActivity" />
         </activity>
         <activity
             android:name=".Login"
@@ -46,6 +50,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity2Activity"
+            android:label="@string/title_activity_main_activity2"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="waxa.easysurvey.MainActivity" />
         </activity>
     </application>
 
